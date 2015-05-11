@@ -1,0 +1,15 @@
+<h2>Continue as type of user:</h2>
+
+<% if session.has_key?(:user_type) %>
+  You are currently logged in as a member of the '<%= session[:user_type] %>' group.
+  <br /><br />
+<% end %>
+
+
+
+<form action='/' method='post'>
+  <input type="radio" name='user_type' id='hr' value='hr'>HR<br>
+  <input type="radio" name='user_type' id='project_manager' value='project_manager'>Project Manager
+  <br />
+  <button type='submit'>Continue</button>
+</form>
