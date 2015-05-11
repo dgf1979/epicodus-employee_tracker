@@ -114,11 +114,22 @@ end
 
 patch('/projects/:id') do |id|
   employee_ids = params.fetch('employees').map { |id| id = id.to_i }
-  employee_ids.each do |employee_id|
-    Employee.find(employee_id).update(:project_id => id)
+
+  if params.fetch('action_type') == 'remove'
+    Project.find(id.to_i).remove(employee_ids)
+  else
+    employee_ids.each do |employee_id|
+      Employee.find(employee_id).update(:project_id => id)
+    end
   end
   redirect to("/projects/#{id}")
 end
+
+# patch('/projects/:project_id/:employee_id') do |project_id, employee_id|
+#   project = Project.find(project_id.to_i)
+#   project.remove([])
+#
+# end
 
 delete('/projects/:id') do |id|
   Project.find(id.to_i).destroy

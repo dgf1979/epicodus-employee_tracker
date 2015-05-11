@@ -8,16 +8,22 @@
       <option value='<%= employee.id %>'><%= employee.name() %></option>
     <% end %>
   </select>
-  <button type='submit'>Add</button>
+  <button type='submit' name='action_type' value='add'>Add</button>
 </form>
 
 <h4>Assigned Employees:</h4>
 
-<ul>
-  <% @project.employees().each do |employee| %>
-    <li><%= employee.name() %></li>
-  <% end %>
-</ul>
+<form action="/projects/<%= @project.id %>" method="post">
+  <input type='hidden' name='_method' value='patch'>
+  <ul>
+    <% @project.employees().each do |employee| %>
+      <li><%= employee.name() %>
+      <input type="checkbox" name="employees[]" id="<%= employee.id %>" value="<%= employee.id %>">
+      </li>
+    <% end %>
+  </ul>
+<button type="submit" name='action_type' value='remove'>remove</button>
+</form>
 
 <form action='/projects/<%= @project.id %>' method='post'>
   <input type='hidden' name='_method' value='delete'>

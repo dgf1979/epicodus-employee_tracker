@@ -117,4 +117,15 @@ describe("user interaction with projects", {:type => :feature}) do
     expect(page).to(have_content("Susan"))
   end
 
+  it('un-assigns a user from a project') do
+    money = Project.create(name: "Money")
+    bob = money.employees.create(name: "Bob")
+    visit("/projects/#{money.id}")
+    check("#{bob.id}")
+    click_button("remove")
+# binding.pry
+    expect(html).to have_css('option', :text => 'Bob')
+    expect(html).to have_css('li', :count => 0)
+  end
+
 end
