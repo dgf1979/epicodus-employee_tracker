@@ -6,6 +6,7 @@ require('pg')
 require('pry')
 require('./lib/division')
 require('./lib/employee')
+require('./lib/project')
 
 
 RSpec.configure do |config|
@@ -19,6 +20,9 @@ RSpec.configure do |config|
     end
     Employee.all().each() do |employee|
       employee.destroy()
+    end
+    Project.all().each() do |project|
+      project.destroy()
     end
   end
 end
