@@ -21,3 +21,12 @@ describe('Employee Tracer', { :type => :feature }) do
   end
 
 end
+
+describe('creating a division', {:type => :feature}) do
+  it('allows a user logged in as HR to create a new division') do
+    visit('/divisions/add')
+    fill_in('name', :with => 'Sales')
+    click_button('Add')
+    expect(page).to have_content('Sales')
+  end
+end
