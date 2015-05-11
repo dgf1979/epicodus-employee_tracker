@@ -41,6 +41,11 @@ get('/divisions') do
 end
 
 #EMPLOYEES
+get('/employees') do
+  @employees = Employee.all()
+  erb(:employees)
+end
+
 get('/employees/add') do
   erb(:employee_add_form)
 end

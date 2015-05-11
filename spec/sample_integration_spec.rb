@@ -13,7 +13,7 @@ describe('Sinatra framework check', { :type => :feature }) do
 end
 
 describe('Employee Tracer', { :type => :feature }) do
-  it('logs in as a class of user and saves as a sesion variable') do
+  it('logs in as a class of user and saves as a session variable') do
     visit('/')
     choose('hr')
     click_button('Continue')
@@ -36,6 +36,15 @@ describe('user interaction with employees', {:type  => :feature}) do
     visit('/employees/add')
     fill_in('name', :with => 'Bob')
     click_button('Add')
+    expect(page).to have_content('Bob')
+  end
+
+  it('lists all employees') do
+    # visit('/employees/add')
+    # fill_in('name', :with => 'Bob')
+    # click_button('Add')
+    Employee.create(name: 'Bob')
+    visit('/employees')
     expect(page).to have_content('Bob')
   end
 end
