@@ -72,4 +72,10 @@ describe('user interaction with employees', {:type  => :feature}) do
     expect(page).to(have_content("Division: #{sales.name}"))
   end
 
+  it('lets user fire an employee') do
+    john = Employee.create(name: "John")
+    visit("/employees/#{john.id()}")
+    click_button("Fire")
+    expect(page).to_not(have_content("John"))
+  end
 end
