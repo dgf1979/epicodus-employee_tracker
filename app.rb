@@ -47,7 +47,11 @@ get('/divisions/:id') do |id|
 end
 
 patch('/divisions/:id') do |id|
-
+  employee_ids = params.fetch('employees').map { |id| id = id.to_i }
+  employee_ids.each do |employee_id|
+    Employee.find(employee_id).update(:division_id => id)
+  end
+  redirect to("/divisions/#{id}")
 end
 
 #EMPLOYEES

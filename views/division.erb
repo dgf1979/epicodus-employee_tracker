@@ -1,0 +1,17 @@
+<form action='/divisions/<%= @division.id %>' method='post'>
+  <input type='hidden' name='_method' value='patch'>
+  <select multiple name='employees[]' id='employees'>
+    <% @employees_no_division.each do |employee| %>
+      <option value='<%= employee.id %>'><%= employee.name() %></option>
+    <% end %>
+  </select>
+  <button type='submit'>Add</button>
+</form>
+
+<h4>Division Members:</h4>
+
+<ul>
+  <% @division.employees().each do |employee| %>
+    <li><%= employee.name() %></li>
+  <% end %>
+</ul>

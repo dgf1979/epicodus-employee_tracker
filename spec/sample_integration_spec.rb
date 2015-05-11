@@ -48,17 +48,19 @@ describe('user interaction with employees', {:type  => :feature}) do
     expect(page).to have_content('Bob')
   end
 
-  # it('lets an HR user add employees to a division') do
-  #   sales = Division.create(name: "Sales")
-  #   bob = Employee.create(name: "Bob")
-  #   susan = Employee.create(name: "Susan")
-  #   john = Employee.create(name: "John")
-  #   visit("/divisions/#{sales.id}")
-  #   select bob.id, from: "employees"
-  #   select susan.id, from: "employees"
-  #   click_button("Add employees")
-  #   expect(page).to(have_content("Bob"))
-  #   expect(page).to(have_content("Susan"))
-  # end
+  it('lets an HR user add employees to a division') do
+    sales = Division.create(name: "Sales")
+    bob = Employee.create(name: "Bob")
+    susan = Employee.create(name: "Susan")
+    john = Employee.create(name: "John")
+    visit("/divisions/#{sales.id}")
+    select bob.name, from: "employees[]"
+    select susan.name, from: "employees[]"
+    click_button("Add")
+    expect(html).to_not(have_content('Bob</option>'))
+    expect(page).to(have_content("Bob"))
+    expect(html).to_not(have_content('Susan</option>'))
+    expect(page).to(have_content("Susan"))
+  end
 
 end
