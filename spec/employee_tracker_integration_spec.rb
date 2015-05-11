@@ -102,4 +102,19 @@ describe("user interaction with projects", {:type => :feature}) do
     expect(page).to_not(have_content('Doomed to fail'))
   end
 
+  it('lets a project manager add employees to a project') do
+    money = Project.create(name: "Money")
+    bob = Employee.create(name: "Bob")
+    susan = Employee.create(name: "Susan")
+    john = Employee.create(name: "John")
+    visit("/projects/#{money.id}")
+    select bob.name, from: "employees[]"
+    select susan.name, from: "employees[]"
+    click_button("Add")
+    expect(html).to_not(have_content('Bob</option>'))
+    expect(page).to(have_content("Bob"))
+    expect(html).to_not(have_content('Susan</option>'))
+    expect(page).to(have_content("Susan"))
+  end
+
 end

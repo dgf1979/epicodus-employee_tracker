@@ -1,5 +1,24 @@
 <h1>Project: <%= @project.name %></h1>
 
+
+<form action='/projects/<%= @project.id %>' method='post'>
+  <input type='hidden' name='_method' value='patch'>
+  <select multiple name='employees[]' id='employees'>
+    <% @employees_no_project.each do |employee| %>
+      <option value='<%= employee.id %>'><%= employee.name() %></option>
+    <% end %>
+  </select>
+  <button type='submit'>Add</button>
+</form>
+
+<h4>Assigned Employees:</h4>
+
+<ul>
+  <% @project.employees().each do |employee| %>
+    <li><%= employee.name() %></li>
+  <% end %>
+</ul>
+
 <form action='/projects/<%= @project.id %>' method='post'>
   <input type='hidden' name='_method' value='delete'>
   <button type='submit'>Delete</button>

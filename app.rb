@@ -108,7 +108,16 @@ end
 
 get('/projects/:id') do |id|
   @project = Project.find(id.to_i)
+  @employees_no_project = Employee.no_project()
   erb(:project)
+end
+
+patch('/projects/:id') do |id|
+  employee_ids = params.fetch('employees').map { |id| id = id.to_i }
+  employee_ids.each do |employee_id|
+    Employee.find(employee_id).update(:project_id => id)
+  end
+  redirect to("/projects/#{id}")
 end
 
 delete('/projects/:id') do |id|
