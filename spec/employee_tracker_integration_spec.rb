@@ -128,4 +128,14 @@ describe("user interaction with projects", {:type => :feature}) do
     expect(html).to have_css('li', :count => 0)
   end
 
+  it('puts any assigned employees back into the unassigned project pool when project is deleted') do
+    money = Project.create(name: "Money")
+    newproj = Project.create(name: "New Project")
+    bob = money.employees.create(name: "Bob")
+    visit("/projects/#{money.id}")
+    click_button('Delete')
+    visit("/projects/#{newproj.id}")
+    expect(html).to have_css('option', :text => 'Bob')
+  end
+
 end
