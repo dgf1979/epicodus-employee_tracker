@@ -12,7 +12,7 @@ describe('Sinatra framework check', { :type => :feature }) do
   end
 end
 
-describe('Employee Tracer', { :type => :feature }) do
+describe('Employee Tracker', { :type => :feature }) do
   it('logs in as a class of user and saves as a session variable') do
     visit('/')
     choose('hr')
@@ -61,6 +61,15 @@ describe('user interaction with employees', {:type  => :feature}) do
     expect(page).to(have_content("Bob"))
     expect(html).to_not(have_content('Susan</option>'))
     expect(page).to(have_content("Susan"))
+  end
+
+  it('lets an HR user add or change the division for an employee') do
+    john = Employee.create(name: "John")
+    sales = Division.create(name: "Sales")
+    visit("/employees/#{john.id()}")
+    select(sales.name, from: "divisions")
+    click_button('Update Division')
+    expect(page).to(have_content("Division: #{sales.name}"))
   end
 
 end

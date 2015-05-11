@@ -69,7 +69,14 @@ post('/employees/add') do
   redirect to("/employees/#{new_employee.id}")
 end
 
+patch('/employees/:id') do |id|
+  division_id = params.fetch("divisions").to_i
+  Employee.find(id.to_i).update(:division_id => division_id)
+  redirect to("/employees/#{id}")
+end
+
 get('/employees/:id') do |id|
   @employee = Employee.find(id.to_i)
+  @divisions = Division.all
   erb(:employee)
 end

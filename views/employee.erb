@@ -1,1 +1,15 @@
 <h1><%= @employee.name %></h1>
+
+<% unless @employee.division_id == nil %>
+  <h2>Division: <%= @employee.division.name %> </h2>
+<% end %>
+
+<form action='/employees/<%= @employee.id %>' method='post'>
+  <input type='hidden' name='_method' value='patch'>
+  <select name='divisions' id='divisions'>
+    <% @divisions.each do |division| %>
+      <option value='<%= division.id %>'><%= division.name() %></option>
+    <% end %>
+  </select>
+  <button type='submit'>Update Division</button>
+</form>
