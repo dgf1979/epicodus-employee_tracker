@@ -78,4 +78,13 @@ describe('user interaction with employees', {:type  => :feature}) do
     click_button("Fire")
     expect(page).to_not(have_content("John"))
   end
+
+  it('lets user delete a division') do
+    sales = Division.create(name: "Sales")
+    visit("/divisions/#{sales.id}")
+    click_button('Delete')
+    expect(page).to_not(have_content('Sales'))
+  end
+
+
 end

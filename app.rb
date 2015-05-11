@@ -54,6 +54,11 @@ patch('/divisions/:id') do |id|
   redirect to("/divisions/#{id}")
 end
 
+delete('/divisions/:id') do |id|
+  Division.find(id.to_i).destroy
+  redirect to('/divisions')
+end
+
 #EMPLOYEES
 get('/employees') do
   @employees = Employee.all()
