@@ -7,6 +7,7 @@ require('pry')
 require('./lib/division')
 require('./lib/employee')
 require('./lib/project')
+ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 
 RSpec.configure do |config|
