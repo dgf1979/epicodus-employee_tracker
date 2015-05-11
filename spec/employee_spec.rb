@@ -6,4 +6,10 @@ describe(Employee) do
     employee = Employee.create({ :name => 'Bob Loblaw', :division_id => division.id() })
     expect(employee.division()).to(eq(division))
   end
+
+  it('tells which project the employee is working on') do
+    project = Project.create({:name => 'get more clients'})
+    employee = Employee.create({ :name => 'Bob Loblaw', :project_id => project.id() })
+    expect(employee.project()).to(eq(project))
+  end
 end
