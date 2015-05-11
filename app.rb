@@ -90,3 +90,18 @@ get('/employees/:id') do |id|
   @divisions = Division.all
   erb(:employee)
 end
+
+#PROJECTS
+get('/projects') do
+  @projects = Project.all()
+  erb(:projects)
+end
+
+get('/projects/add') do
+  erb(:project_add_form)
+end
+
+post('/projects/add') do
+  Project.create(:name => params.fetch('name'))
+  redirect to('/projects')
+end

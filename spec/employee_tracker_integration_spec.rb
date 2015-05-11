@@ -85,6 +85,13 @@ describe('user interaction with employees', {:type  => :feature}) do
     click_button('Delete')
     expect(page).to_not(have_content('Sales'))
   end
+end
 
-
+describe("user interaction with projects", {:type => :feature}) do
+  it("lets a project manager create a project") do
+    visit("/projects/add")
+    fill_in("name", :with => "Website")
+    click_button("Add project")
+    expect(page).to(have_content("Website"))
+  end
 end
