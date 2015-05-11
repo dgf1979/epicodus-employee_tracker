@@ -133,8 +133,8 @@ end
 
 delete('/projects/:id') do |id|
   project = Project.find(id.to_i)
-  employee_ids = project.employees.map { |employee| employee.id }
-  project.remove(employee_ids)
+  # employee_ids = project.employees.map { |employee| employee.id }
+  # project.remove(employee_ids)
   project.destroy
   redirect to('/projects')
 end
