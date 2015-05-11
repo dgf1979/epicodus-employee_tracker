@@ -40,6 +40,16 @@ get('/divisions') do
   erb(:divisions)
 end
 
+get('/divisions/:id') do |id|
+  @division = Division.find(id.to_i)
+  @employees_no_division = Employee.no_division()
+  erb(:division)
+end
+
+patch('/divisions/:id') do |id|
+
+end
+
 #EMPLOYEES
 get('/employees') do
   @employees = Employee.all()

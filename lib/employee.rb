@@ -5,4 +5,8 @@ class Employee < ActiveRecord::Base
   scope(:no_project, -> do
         Employee.where(:project_id => nil)
       end)
+
+  scope(:no_division, -> do
+        Employee.where(:division_id => nil)
+      end)
 end
