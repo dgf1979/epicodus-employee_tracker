@@ -73,6 +73,10 @@ describe('user interaction with employees', {:type  => :feature}) do
   end
 
   it('lets user fire an employee') do
+    visit('/')
+    choose('hr')
+    click_button('Continue')
+
     john = Employee.create(name: "John")
     visit("/employees/#{john.id()}")
     click_button("Fire")
@@ -136,6 +140,16 @@ describe("user interaction with projects", {:type => :feature}) do
     click_button('Delete')
     visit("/projects/#{newproj.id}")
     expect(html).to have_css('option', :text => 'Bob')
+  end
+
+  it('verifies project manager cannot fire employee') do
+    visit('/')
+    choose('project_manager')
+    click_button('Continue')
+
+    bob = Employee.create(name: 'bob')
+    visit("/employees/#{bob.id}")
+    expect(html).to_not have_css('button', :text => 'Fire')
   end
 
 end

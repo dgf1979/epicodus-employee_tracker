@@ -14,7 +14,11 @@
   <button type='submit'>Update Division</button>
 </form>
 
-<form action='/employees/<%= @employee.id %>' method='post'>
-  <input type='hidden' name='_method' value='delete'>
-  <button type='submit'>Fire</button> 
-</form>
+<% if session[:user_type] == "hr" %>
+
+  <form action='/employees/<%= @employee.id %>' method='post'>
+    <input type='hidden' name='_method' value='delete'>
+    <button type='submit'>Fire</button>
+  </form>
+
+<% end %>
