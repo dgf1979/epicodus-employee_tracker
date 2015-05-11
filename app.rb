@@ -39,3 +39,18 @@ get('/divisions') do
   @divisions = Division.all()
   erb(:divisions)
 end
+
+#EMPLOYEES
+get('/employees/add') do
+  erb(:employee_add_form)
+end
+
+post('/employees/add') do
+  new_employee = Employee.create(name: params.fetch('name'))
+  redirect to("/employees/#{new_employee.id}")
+end
+
+get('/employees/:id') do |id|
+  @employee = Employee.find(id.to_i)
+  erb(:employee)
+end

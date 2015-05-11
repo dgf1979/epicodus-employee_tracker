@@ -17,7 +17,7 @@ describe('Employee Tracer', { :type => :feature }) do
     visit('/')
     choose('hr')
     click_button('Continue')
-    expect(page).to(have_content('hr'))
+    expect(page).to(have_content('HR'))
   end
 
 end
@@ -28,5 +28,14 @@ describe('creating a division', {:type => :feature}) do
     fill_in('name', :with => 'Sales')
     click_button('Add')
     expect(page).to have_content('Sales')
+  end
+end
+
+describe('user interaction with employees', {:type  => :feature}) do
+  it('allows user to create an employee') do
+    visit('/employees/add')
+    fill_in('name', :with => 'Bob')
+    click_button('Add')
+    expect(page).to have_content('Bob')
   end
 end
