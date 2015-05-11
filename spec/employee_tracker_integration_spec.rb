@@ -94,4 +94,12 @@ describe("user interaction with projects", {:type => :feature}) do
     click_button("Add project")
     expect(page).to(have_content("Website"))
   end
+
+  it("lets a project manager delete a project") do
+    project = Project.create(name: 'Doomed to fail')
+    visit("/projects/#{project.id()}")
+    click_button("Delete")
+    expect(page).to_not(have_content('Doomed to fail'))
+  end
+
 end

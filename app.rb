@@ -105,3 +105,13 @@ post('/projects/add') do
   Project.create(:name => params.fetch('name'))
   redirect to('/projects')
 end
+
+get('/projects/:id') do |id|
+  @project = Project.find(id.to_i)
+  erb(:project)
+end
+
+delete('/projects/:id') do |id|
+  Project.find(id.to_i).destroy
+  redirect to('/projects')
+end
